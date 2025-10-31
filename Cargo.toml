@@ -1,0 +1,16 @@
+[package]
+name = "burnt-apple"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+arbitrary = { version = "1.4.2", features = ["derive"] }
+bevy = "0.17.2"
+burn = { version = "0.19.0", features = ["wgpu"] }
+chrono = "0.4.42"
+clap = { version = "4.5.51", features = ["derive"] }
+color-eyre = "0.6.5"
+eyre = "0.6.12"
+strum = { version = "0.27.2", features = ["derive"] }
+tracing = "0.1.41"
+tracing-subscriber = { version = "0.3.20", features = ["env-filter", "json", "serde", "serde_json"] }
