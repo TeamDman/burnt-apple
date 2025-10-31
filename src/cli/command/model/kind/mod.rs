@@ -1,12 +1,11 @@
 pub mod model_kind_command;
 pub mod model_kind_list_command;
 
+use crate::cli::command::model::kind::model_kind_command::ModelKindCommand;
+use crate::cli::to_args::ToArgs;
 use arbitrary::Arbitrary;
 use clap::Args;
 use std::ffi::OsString;
-
-use crate::cli::command::model::kind::model_kind_command::ModelKindCommand;
-use crate::cli::to_args::ToArgs;
 
 #[derive(Args, Clone, Arbitrary, PartialEq, Debug)]
 pub struct ModelKindArgs {

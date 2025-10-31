@@ -1,16 +1,17 @@
+use crate::cli::command::experiment::Experiment;
+use crate::cli::json_to_stdout_pretty::JsonToStdoutPretty;
+use crate::cli::to_args::ToArgs;
 use arbitrary::Arbitrary;
 use clap::Args;
 use std::ffi::OsString;
-use tracing::info;
-
-use crate::cli::to_args::ToArgs;
+use strum::VariantArray;
 
 #[derive(Args, Clone, Arbitrary, PartialEq, Debug, Default)]
 pub struct ExperimentListArgs {}
 
 impl ExperimentListArgs {
     pub fn invoke(self) -> eyre::Result<()> {
-        info!("experiment list invoked");
+        Experiment::VARIANTS.write_json_to_stdout_pretty()?;
         Ok(())
     }
 }

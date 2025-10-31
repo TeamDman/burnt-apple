@@ -1,14 +1,15 @@
 pub mod command;
 pub mod global_args;
+pub mod json_to_stdout_pretty;
 pub mod to_args;
-
-use arbitrary::Arbitrary;
-use clap::Parser;
-use std::ffi::OsString;
 
 use crate::cli::command::Command;
 use crate::cli::global_args::GlobalArgs;
-use crate::cli::to_args::{Invocable, ToArgs};
+use crate::cli::to_args::Invocable;
+use crate::cli::to_args::ToArgs;
+use arbitrary::Arbitrary;
+use clap::Parser;
+use std::ffi::OsString;
 
 #[derive(Parser, Arbitrary, PartialEq, Debug)]
 #[clap(version)]

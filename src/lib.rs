@@ -3,11 +3,10 @@
 pub mod cli;
 pub mod tracing;
 
+use crate::cli::Cli;
 use clap::CommandFactory;
 use clap::FromArgMatches;
 use tracing_subscriber::filter::LevelFilter;
-
-use crate::cli::Cli;
 
 pub fn main() -> eyre::Result<()> {
     color_eyre::install()?;

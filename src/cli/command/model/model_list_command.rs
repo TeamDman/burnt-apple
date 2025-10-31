@@ -1,9 +1,8 @@
+use crate::cli::to_args::ToArgs;
 use arbitrary::Arbitrary;
 use clap::Args;
 use std::ffi::OsString;
 use tracing::info;
-
-use crate::cli::to_args::ToArgs;
 
 #[derive(Args, Clone, Arbitrary, PartialEq, Debug, Default)]
 pub struct ModelListArgs {}

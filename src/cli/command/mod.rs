@@ -1,13 +1,12 @@
 pub mod experiment;
 pub mod model;
 
-use arbitrary::Arbitrary;
-use clap::Subcommand;
-use std::ffi::OsString;
-
 use crate::cli::command::experiment::ExperimentArgs;
 use crate::cli::command::model::ModelArgs;
 use crate::cli::to_args::ToArgs;
+use arbitrary::Arbitrary;
+use clap::Subcommand;
+use std::ffi::OsString;
 
 #[derive(Subcommand, Arbitrary, PartialEq, Debug)]
 pub enum Command {

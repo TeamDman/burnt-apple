@@ -1,10 +1,9 @@
-use arbitrary::Arbitrary;
-use clap::Subcommand;
-use std::ffi::OsString;
-
 use crate::cli::command::experiment::experiment_list_command::ExperimentListArgs;
 use crate::cli::command::experiment::experiment_run_command::ExperimentRunArgs;
 use crate::cli::to_args::ToArgs;
+use arbitrary::Arbitrary;
+use clap::Subcommand;
+use std::ffi::OsString;
 
 #[derive(Subcommand, Clone, Arbitrary, PartialEq, Debug)]
 pub enum ExperimentCommand {

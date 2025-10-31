@@ -3,12 +3,11 @@ pub mod model_command;
 pub mod model_list_command;
 pub mod model_train_command;
 
+use crate::cli::command::model::model_command::ModelCommand;
+use crate::cli::to_args::ToArgs;
 use arbitrary::Arbitrary;
 use clap::Args;
 use std::ffi::OsString;
-
-use crate::cli::command::model::model_command::ModelCommand;
-use crate::cli::to_args::ToArgs;
 
 #[derive(Args, Arbitrary, PartialEq, Debug)]
 pub struct ModelArgs {

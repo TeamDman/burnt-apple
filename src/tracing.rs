@@ -1,6 +1,7 @@
 use chrono::Local;
 use eyre::Result;
 use std::fs::File;
+use std::str::FromStr;
 use std::sync::Arc;
 use std::sync::Mutex;
 pub use tracing::Level;
@@ -11,17 +12,44 @@ use tracing_subscriber::fmt::writer::BoxMakeWriter;
 use tracing_subscriber::prelude::*;
 use tracing_subscriber::util::SubscriberInitExt;
 
+pub const DEFAULT_EXTRA_FILTERS: &str = r#"
+bevy_shader=warn
+offset_allocator=warn
+bevy_app=info
+bevy_render=info
+gilrs=info
+cosmic_text=info
+naga=warn
+wgpu=error
+wgpu_hal=error
+bevy_skein=trace
+bevy_winit::system=info
+cubecl_wgpu=warn
+"#;
+
 pub fn init_tracing(level: impl Into<Directive>, json: bool) -> Result<()> {
     let default_directive: Directive = level.into();
     let make_env_filter = || {
-        EnvFilter::builder()
+        let mut filter = EnvFilter::builder()
             .with_default_directive(default_directive.clone())
-            .from_env_lossy()
+            .from_env_lossy();
+
+        for directive in DEFAULT_EXTRA_FILTERS
+            .split('\n')
+            .map(str::trim)
+            .filter(|directive| !directive.is_empty())
+        {
+            if let Ok(extra) = Directive::from_str(directive) {
+                filter = filter.add_directive(extra);
+            }
+        }
+
+        filter
     };
     let make_stderr_layer = || {
         tracing_subscriber::fmt::layer()
             .with_file(cfg!(debug_assertions))
-            .with_target(false)
+            .with_target(true)
             .with_line_number(cfg!(debug_assertions))
             .with_writer(std::io::stderr)
             .pretty()

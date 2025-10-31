@@ -3,14 +3,13 @@ pub mod experiment_list_command;
 pub mod experiment_run_command;
 
 mod experiment;
-pub use experiment::*;
-
-use arbitrary::Arbitrary;
-use clap::Args;
-use std::ffi::OsString;
-
+pub mod experiments;
 use crate::cli::command::experiment::experiment_command::ExperimentCommand;
 use crate::cli::to_args::ToArgs;
+use arbitrary::Arbitrary;
+use clap::Args;
+pub use experiment::*;
+use std::ffi::OsString;
 
 #[derive(Args, Arbitrary, PartialEq, Debug)]
 pub struct ExperimentArgs {
