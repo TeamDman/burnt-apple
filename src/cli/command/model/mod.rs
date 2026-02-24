@@ -1,7 +1,8 @@
-pub mod kind;
+pub mod direct;
 pub mod model_command;
 pub mod model_list_command;
-pub mod model_train_command;
+pub mod model_registry;
+pub mod settings;
 
 use crate::cli::command::model::model_command::ModelCommand;
 use crate::cli::to_args::ToArgs;

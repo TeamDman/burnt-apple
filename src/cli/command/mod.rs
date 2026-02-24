@@ -4,36 +4,35 @@ pub mod model;
 use crate::cli::command::experiment::ExperimentArgs;
 use crate::cli::command::model::ModelArgs;
 use crate::cli::to_args::ToArgs;
-use arbitrary::Arbitrary;
 use clap::Subcommand;
 use std::ffi::OsString;
 
-#[derive(Subcommand, Arbitrary, PartialEq, Debug)]
-pub enum Command {
+#[derive(Subcommand, PartialEq, Debug)]
+pub enum CliCommand {
     /// Operations for managing burnt apple models
     Model(ModelArgs),
     /// Experiment workflow helpers
     Experiment(ExperimentArgs),
 }
 
-impl Command {
+impl CliCommand {
     pub fn invoke(self) -> eyre::Result<()> {
         match self {
-            Command::Model(args) => args.invoke(),
-            Command::Experiment(args) => args.invoke(),
+            CliCommand::Model(args) => args.invoke(),
+            CliCommand::Experiment(args) => args.invoke(),
         }
     }
 }
 
-impl ToArgs for Command {
+impl ToArgs for CliCommand {
     fn to_args(&self) -> Vec<OsString> {
         let mut args = Vec::new();
         match self {
-            Command::Model(model_args) => {
+            CliCommand::Model(model_args) => {
                 args.push("model".into());
                 args.extend(model_args.to_args());
             }
-            Command::Experiment(experiment_args) => {
+            CliCommand::Experiment(experiment_args) => {
                 args.push("experiment".into());
                 args.extend(experiment_args.to_args());
             }
